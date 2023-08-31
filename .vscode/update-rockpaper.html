@@ -5,39 +5,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
-      
+    body {
+      background-color: rgb(25, 25, 25);
+      color: white;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    .title {
+      font-size: 30px;
+      font-weight: bold;
+    }
+    .move-icon {
+      height: 50px;
+    }
+    .move-button {
+      background-color: transparent;
+      border: 1px solid #fff;
+      width: 120px;
+      height: 120px;
+      border-radius: 60px;
+      margin-right: 15px;
+      cursor: pointer;
+    }
+    .result {
+      font-size: 25px;
+      font-weight: bold;
+      margin-top: 50px;
+    }
+    .score {
+      margin-top: 50px;
+    }
+    .reset-button {
+      background-color: #fff;
+      border: none;
+      font-size: 15px;
+      padding: 8px 15px;
+      cursor: pointer;
+    }
     </style>
   </head>
   <body>
-    <p>Rock Paper Scissiors</p>
+    <p class="title">Rock Paper Scissiors</p>
     <button
       onclick="
 const computerMove =  pickComputerMove();
 playgame('Rock');
-"
-    >
-      Rock
-    </button>
-
+" class="move-button"><img src="img/rock-emoji.png" class="move-icon"></button>
+  
     <button
       onclick="
  playgame('Paper');
-"
-    >
-      Paper
-    </button>
+" class="move-button"><img src="img/paper-emoji.png" class="move-icon"></button>
 
     <button
       onclick="
  playgame('Scissiors');
-"
-    >
-      Scissiors
-    </button>
+" class="move-button"><img src="img/scissors-emoji.png" class="move-icon"></button>
 
-    <p class="js-result"></p>
+    <p class="js-result result"></p>
     <p class="js-move"></p>
-    <p class="js-score"></p>
+    <p class="js-score score"></p>
 
     <button
       onclick="
@@ -46,38 +72,11 @@ playgame('Rock');
     score.tie =0;
     localStorage.removeItem('score');
     updatescoreElement();
-  ">Reset score</button>
-  
-
-    <p>Amazon Shipping Calculator</p>
-    <input placeholder="Cost of orders" class="js-cost-input" onkeydown="
-    handlecostkeydown(event);
-    ">
-    <button onclick="
-      CalculateTotalcost();    
-    ">Calculate</button>
-    <p class="js-cost-total"></p>  
+  " class="reset-button">Reset score</button>
+   
     
     <script>
-      function handlecostkeydown (event) {
-       if (event.key === 'Enter') {
-        CalculateTotalcost();
-       }
-
-      }
-        
-       function CalculateTotalcost() {
-       const inputElement =  document.querySelector('.js-cost-input');
-       let cost = Number(inputElement.value);
-       
-       if (cost < 40) {
-        cost = cost +   10;
-       }
-       document.querySelector('.js-cost-total')
-       .innerHTML =` $${cost}`;
-       }
-
-
+      
       const score = JSON.parse(localStorage.getItem("score")) || {
         win: 0,
         loose: 0,
@@ -132,7 +131,10 @@ playgame('Rock');
         .innerHTML = result;
       
         document.querySelector('.js-move')
-        .innerHTML = `You ${playerMove}- ${computerMove} Computer`;
+        .innerHTML = `you
+      <img src="img/${playerMove}-emoji.png" class="move-icon">
+      <img src="img/${computerMove}-emoji.png" class="move-icon">
+      computer`;
       }
 
       function updatescoreElement() {
